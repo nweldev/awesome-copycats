@@ -230,11 +230,15 @@ function theme.at_screen_connect(s)
   gears.wallpaper.centered(wallpaper)
 
   -- Tags
-  awful.tag(awful.util.tagnames, s, {
-    awful.layout.suit.tile,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile
-  })
+  awful.tag(
+    awful.util.tagnames,
+    s,
+    {
+      awful.layout.suit.tile,
+      awful.layout.suit.tile,
+      awful.layout.suit.tile
+    }
+  )
 
   -- Create a promptbox for each screen
   s.mypromptbox = awful.widget.prompt()
@@ -281,7 +285,78 @@ function theme.at_screen_connect(s)
     )
   )
   -- Create a taglist widget
-  s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+  s.mytaglist =
+    awful.widget.taglist(
+    {
+      screen = s,
+      filter = awful.widget.taglist.filter.all,
+      style = {
+        shape = gears.shape.powerline
+      },
+      layout = wibox.layout.fixed.horizontal,
+      widget_template = {
+        {
+          {
+            {
+              {
+                {
+                  id = "index_role",
+                  widget = wibox.widget.textbox
+                },
+                margins = 1,
+                widget = wibox.container.margin
+              },
+              widget = wibox.container.background
+            },
+            {
+              {
+                id = "icon_role",
+                widget = wibox.widget.imagebox
+              },
+              margins = 2,
+              widget = wibox.container.margin
+            },
+            {
+              id = "text_role",
+              widget = wibox.widget.textbox
+            },
+            layout = wibox.layout.fixed.horizontal
+          },
+          left = 9,
+          right = 9,
+          widget = wibox.container.margin
+        },
+        id = "background_role",
+        widget = wibox.container.background,
+        -- Add support for hover colors and an index label
+        create_callback = function(self, c3, index, objects) --luacheck: no unused args
+          self:get_children_by_id("index_role")[1].markup = "<b> " .. index .. " </b>"
+          self:connect_signal(
+            "mouse::enter",
+            function()
+              if self.bg ~= theme.bg_focus then
+                self.backup = self.bg
+                self.has_backup = true
+              end
+              self.bg = theme.bg_focus
+            end
+          )
+          self:connect_signal(
+            "mouse::leave",
+            function()
+              if self.has_backup then
+                self.bg = self.backup
+              end
+            end
+          )
+        end,
+        update_callback = function(self, c3, index, objects) --luacheck: no unused args
+          self:get_children_by_id("index_role")[1].markup = "<b> " .. index .. " </b>"
+        end
+      },
+      buttons = awful.util.taglist_buttons
+    }
+  )
 
   -- Create a tasklist widget
   s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
