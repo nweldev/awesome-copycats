@@ -15,7 +15,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/copycats/themes/powerarrow-dark"
-theme.wallpaper = theme.dir .. "/bonita.png"
+theme.wallpaper = theme.dir .. "/future-is-coming.png"
 theme.font = "Fira Code 9"
 theme.fg_normal = "#DDDDFF"
 theme.fg_focus = "#f44336"
@@ -252,7 +252,7 @@ function theme.at_screen_connect(s)
   if type(wallpaper) == "function" then
     wallpaper = wallpaper(s)
   end
-  gears.wallpaper.centered(wallpaper)
+  gears.wallpaper.tiled(wallpaper)
 
   -- Tags
   awful.tag(
