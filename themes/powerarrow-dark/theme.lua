@@ -252,7 +252,7 @@ function theme.at_screen_connect(s)
   if type(wallpaper) == "function" then
     wallpaper = wallpaper(s)
   end
-  gears.wallpaper.tiled(wallpaper)
+  gears.wallpaper.tiled(wallpaper, s)
 
   -- Tags
   awful.tag(
