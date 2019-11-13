@@ -15,20 +15,21 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/copycats/themes/powerarrow-dark"
-theme.wallpaper = theme.dir .. "/disagree.png"
+theme.wallpaper = theme.dir .. "/robots.jpg"
 theme.font = "Fira Code 9"
 theme.fg_normal = "#DDDDFF"
-theme.fg_focus = "#f44336"
+theme.fg_focus = "#95ec1b"
 theme.fg_urgent = "#FF0000"
-theme.bg_normal = "#1A1A1A"
-theme.bg_focus = "#313131"
+theme.bg_normal = "#1A1A1A55"
+theme.bg_focus = "#4d7d0a"
 theme.bg_urgent = "#1A1A1A"
 theme.border_width = dpi(1)
 theme.border_normal = "#3F3F3F"
 theme.border_focus = "#7F7F7F"
 theme.border_marked = "#CC9393"
-theme.tasklist_bg_focus = "#1A1A1A"
-theme.titlebar_bg_focus = theme.bg_focus
+theme.tasklist_bg_focus = "#1A1A1ABB"
+theme.bg_systray = "#1A1A1ABB"
+theme.titlebar_bg_focus = "#313131"
 theme.titlebar_bg_normal = theme.bg_normal
 theme.titlebar_fg_focus = theme.fg_focus
 theme.menu_height = dpi(16)
@@ -192,6 +193,15 @@ theme.volume =
   }
 )
 
+-- weather
+local weather = lain.widget.weather({
+  city_id = 2972315, -- Toulouse
+  settings = function()
+    units = math.floor(weather_now["main"]["temp"])
+    widget:set_markup(" " .. markup.font(theme.font, units .. "°C") .. " ")
+  end
+})
+
 -- Net
 -- local neticon = wibox.widget.imagebox(theme.widget_net)
 --[[ local net = lain.widget.net({
@@ -218,7 +228,7 @@ local net =
                 eth_icon:set_image()
             end
         end ]]
-    local wlan0 = net_now.devices.wlp2s0
+    local wlan0 = net_now.devices.wlp5s0
     if wlan0 then
       if wlan0.wifi then
         local signal = wlan0.signal
@@ -407,6 +417,9 @@ function theme.at_screen_connect(s)
       wibox.widget.systray(),
       keyboardlayout,
       spr,
+      arrl_ld,
+      wibox.container.background(weather.icon, theme.bg_focus),
+      wibox.container.background(weather.widget, theme.bg_focus),
       arrl_dl,
       memicon,
       mem.widget,
