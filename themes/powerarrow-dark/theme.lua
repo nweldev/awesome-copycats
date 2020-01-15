@@ -20,7 +20,7 @@ theme.wallpaper = function (s)
   if s ~= screen.primary then
     return theme.dir .. "/robots.jpg"
   end
-  return theme.dir .. "/postapo-dog.jpg"
+  return theme.dir .. "/onestlatech.png"
 end
 
 theme.font = "Fira Code 9"
