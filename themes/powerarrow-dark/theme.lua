@@ -20,7 +20,7 @@ theme.wallpaper = function (s)
   if s ~= screen.primary then
     return theme.dir .. "/robots.jpg"
   end
-  return theme.dir .. "/onestlatech.png"
+  return theme.dir .. "/sad-noel-gopher.jpg"
 end
 
 theme.font = "Fira Code 9"
@@ -269,7 +269,7 @@ function theme.at_screen_connect(s)
   if type(wallpaper) == "function" then
     wallpaper = wallpaper(s)
   end
-  gears.wallpaper.tiled(wallpaper, s)
+  gears.wallpaper.centered(wallpaper, s)
 
   -- Tags
   awful.tag(
