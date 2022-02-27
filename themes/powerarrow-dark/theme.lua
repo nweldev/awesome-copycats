@@ -16,12 +16,14 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/copycats/themes/powerarrow-dark"
 -- theme.wallpaper = theme.dir .. "/robots.jpg"
+--[[
 theme.wallpaper = function (s)
   if s ~= screen.primary then
-    return theme.dir .. "/robots.jpg"
+    return theme.dir .. "/spitzer-dr21.jpg"
   end
-  return theme.dir .. "/sad-noel-gopher.jpg"
+  return theme.dir .. "/blindnet-logo-white.png"
 end
+]]
 
 theme.font = "Fira Code 9"
 theme.fg_normal = "#DDDDFF"
@@ -269,7 +271,7 @@ function theme.at_screen_connect(s)
   if type(wallpaper) == "function" then
     wallpaper = wallpaper(s)
   end
-  gears.wallpaper.centered(wallpaper, s)
+  gears.wallpaper.fit(wallpaper, s)
 
   -- Tags
   awful.tag(
