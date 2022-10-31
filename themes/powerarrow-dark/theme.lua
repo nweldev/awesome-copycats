@@ -27,10 +27,10 @@ end
 
 theme.font = "Fira Code 9"
 theme.fg_normal = "#DDDDFF"
-theme.fg_focus = "#95ec1b"
-theme.fg_urgent = "#FF0000"
+theme.fg_focus = "#FF0000"
+theme.fg_urgent = "#95ec1b"
 theme.bg_normal = "#1A1A1A55"
-theme.bg_focus = "#4d7d0a"
+theme.bg_focus = "#8B0000"
 theme.bg_urgent = "#1A1A1A"
 theme.border_width = dpi(1)
 theme.border_normal = "#3F3F3F"
